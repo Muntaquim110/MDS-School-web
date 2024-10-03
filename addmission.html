@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        form {
+            width: 400px;
+            margin: 0 auto;
+            background-color: beige;
+            border: 1px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center; color: aqua;">Registration Form</h1>
+    <h2 style="text-align: center;"> Addmission Accept only in the 6th , 9th and 11th class.</h2>
+
+
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <span id="firstNameError" class="error"></span>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <span id="lastNameError" class="error"></span>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+        <span id="mobileError" class="error"></span>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error"></span>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        <span id="addressError" class="error"></span>
+
+        <label for="class">Class:</label>
+        <select name="Class" id="Class" form="Class type" required>
+            <option value="class">class</option>
+            <option value="6">6th</option>
+            <option value="9">9th</option>
+            <option value="11">11th PCM</option>
+            <option value="11">11th PCB</option>
+            <option value="11">11th Commerece</option>
+            <option value="11">11th vocational</option>
+            <option value="11">11th Arts</option>
+          </select>
+        
+        <span id="classError" class="error"></span>
+
+        <label for="fatherName">Father's Name:</label>
+        <input type="text" id="fatherName" name="fatherName" required>
+        <span id="fatherNameError" class="error"></span>
+
+        <label for="motherName">Mother's Name:</label>
+        <input type="text" id="motherName" name="motherName" required>
+        <span id="motherNameError" class="error"></span>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+
+            // Clear previous error messages
+            document.querySelectorAll('.error').forEach(el => el.innerHTML = '');
+
+            // Validate First Name
+            let firstName = document.getElementById('firstName').value;
+            if (!firstName.match(/^[a-zA-Z]+$/)) {
+                document.getElementById('firstNameError').innerHTML = "First name should contain only letters.";
+                valid = false;
+            }
+
+            // Validate Last Name
+            let lastName = document.getElementById('lastName').value;
+            if (!lastName.match(/^[a-zA-Z]+$/)) {
+                document.getElementById('lastNameError').innerHTML = "Last name should contain only letters.";
+                valid = false;
+            }
+
+            // Validate Mobile Number
+            let mobile = document.getElementById('mobile').value;
+            if (!mobile.match(/^[0-9]{10}$/)) {
+                document.getElementById('mobileError').innerHTML = "Mobile number should be exactly 10 digits.";
+                valid = false;
+            }
+
+            // Validate Email
+            let email = document.getElementById('email').value;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.match(emailPattern)) {
+                document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
+                valid = false;
+            }
+
+            // Validate Address
+            let address = document.getElementById('address').value;
+            if (address.length < 10) {
+                document.getElementById('addressError').innerHTML = "Address should be at least 10 characters long.";
+                valid = false;
+            }
+
+            // Validate Class
+            let classValue = document.getElementById('class').value;
+            if (classValue === "null") {
+                document.getElementById('classError').innerHTML = "Class is required.";
+                valid = false;
+            }
+
+            // Validate Father's Name
+            let fatherName = document.getElementById('fatherName').value;
+            if (!fatherName.match(/^[a-zA-Z ]+$/)) {
+                document.getElementById('fatherNameError').innerHTML = "Father's name should contain only letters and spaces.";
+                valid = false;
+            }
+
+            // Validate Mother's Name
+            let motherName = document.getElementById('motherName').value;
+            if (!motherName.match(/^[a-zA-Z ]+$/)) {
+                document.getElementById('motherNameError').innerHTML = "Mother's name should contain only letters and spaces.";
+                valid = false;
+            }
+
+            return valid;
+        }
+    </script>
+
+</body>
+</html>
